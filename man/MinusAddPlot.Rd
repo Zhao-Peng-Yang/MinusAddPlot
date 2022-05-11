@@ -2,30 +2,25 @@
 % Please edit documentation in R/MinusAddPlot.R
 \name{MinusAddPlot}
 \alias{MinusAddPlot}
-\title{Visualize the amplicon data}
+\title{Visualize Minus Add Plot}
 \usage{
 MinusAddPlot(data = data, pdf = "Minus_Add_MA_plot.pdf")
 }
 \arguments{
-\item{otuTab}{otu table of your sample}
+\item{data}{data.frame of sample gene exp.}
 
-\item{metaData}{design file}
-
-\item{classToPlot}{which column you want to plot}
-
-\item{topNum}{top n taxa to plot}
-
-\item{col}{colour palette: including all the types of the "display.brewer.all()" in the RColorBrewer package}
+\item{pdf}{out-file.}
 }
 \value{
 
 }
 \description{
-Visualize the amplicon data
+Visualize Minus Add Plot
 }
 \examples{
-otu_table_L2.txt <- system.file("extdata", "otu_table_L2.txt", package = "microVisu")
-design.txt <- system.file("extdata", "design.txt", package = "microVisu")
-taxBarPlot(otuTab = otu_table_L2.txt, metaData = design.txt,
- classToPlot = "status", topNum = 10, col = "Set3")
+library(data.table)
+data<-fread(system.file("extdata", "gene_samples_exp.xls", package = "MinusAddPlot"),header=TRUE,stringsAsFactors=FALSE,data.table=FALSE)
+pdf("Minus_Add_MA_plot.pdf")
+MinusAddPlot(data)
+dev.off()
 }

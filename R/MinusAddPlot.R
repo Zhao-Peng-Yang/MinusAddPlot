@@ -1,18 +1,16 @@
-#' Visualize the amplicon data
+#' Visualize Minus Add Plot
 #'
-#' @param otuTab otu table of your sample
-#' @param metaData design file
-#' @param classToPlot which column you want to plot
-#' @param topNum  top n taxa to plot
-#' @param col colour palette: including all the types of the "display.brewer.all()" in the RColorBrewer package
+#' @param data data.frame of sample gene exp.
+#' @param pdf out-file.
 #' @return
 #'
 #' @export 
 #'
-#' @examples otu_table_L2.txt <- system.file("extdata", "otu_table_L2.txt", package = "microVisu")
-#' @examples design.txt <- system.file("extdata", "design.txt", package = "microVisu")
-#' @examples taxBarPlot(otuTab = otu_table_L2.txt, metaData = design.txt,
-#'  classToPlot = "status", topNum = 10, col = "Set3")
+#' @examples library(data.table)
+#' @examples data<-fread(system.file("extdata", "gene_samples_exp.xls", package = "MinusAddPlot"),header=TRUE,stringsAsFactors=FALSE,data.table=FALSE)
+#' @examples pdf("Minus_Add_MA_plot.pdf")
+#' @examples MinusAddPlot(data)
+#' @examples dev.off()
 MinusAddPlot <- function(data=data,pdf="Minus_Add_MA_plot.pdf"){
 
     library(ggplot2)
@@ -50,9 +48,10 @@ MinusAddPlot <- function(data=data,pdf="Minus_Add_MA_plot.pdf"){
         geom_text(aes(x=max(A)-1.25, y=max(M)-0.5, label=lable), size=4, vjust=0, hjust=0)+
         geom_label_repel(aes(A, M,
             label=Symbol),
-            box.padding=unit(0.01, "lines"),
-            point.padding=unit(0.01, "lines"),
-            segment.colour = "grey50")+
+            box.padding=unit(0.2, "lines"),
+            point.padding=unit(0.2, "lines"),
+            segment.colour = "grey50",
+            max.overlaps=5000)+
         xlab("A")+
         ylab("M")+
         theme_bw()+
@@ -61,4 +60,5 @@ MinusAddPlot <- function(data=data,pdf="Minus_Add_MA_plot.pdf"){
     print(p)
     # system("convert -density 300 Minus_Add_MA_plot.pdf Minus_Add_MA_plot.png")
 }
+
 
