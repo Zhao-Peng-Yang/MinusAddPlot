@@ -11,10 +11,10 @@
 #' @examples pdf("Minus_Add_MA_plot.pdf")
 #' @examples MinusAddPlot(data)
 #' @examples dev.off()
-MinusAddPlot <- function(data=data,pdf="Minus_Add_MA_plot.pdf"){
+MinusAddPlot <- function(data=GeneExp,pdf="Minus_Add_MA_plot.pdf"){
 
-    library(ggplot2)
-    library(ggrepel)
+    require(ggplot2)
+    require(ggrepel)
 
     # check data
     data$A<-(log2(data$G2)+log2(data$G1))/2
@@ -48,8 +48,8 @@ MinusAddPlot <- function(data=data,pdf="Minus_Add_MA_plot.pdf"){
         geom_text(aes(x=max(A)-1.25, y=max(M)-0.5, label=lable), size=4, vjust=0, hjust=0)+
         geom_label_repel(aes(A, M,
             label=Symbol),
-            box.padding=unit(0.2, "lines"),
-            point.padding=unit(0.2, "lines"),
+            box.padding=unit(0.01, "lines"),
+            point.padding=unit(0.01, "lines"),
             segment.colour = "grey50",
             max.overlaps=5000)+
         xlab("A")+
@@ -57,7 +57,9 @@ MinusAddPlot <- function(data=data,pdf="Minus_Add_MA_plot.pdf"){
         theme_bw()+
         ggtitle("MA Plot")+
         theme(plot.title = element_text(hjust=0.5,size=20,colour="black"))
+    pdf(pdf)
     print(p)
+    dev.off()
     # system("convert -density 300 Minus_Add_MA_plot.pdf Minus_Add_MA_plot.png")
 }
 
