@@ -7,8 +7,9 @@
 #' @export 
 #'
 #' @examples library(data.table)
+#' @examples library(MinusAddPlot)
 #' @examples data(GeneExp)
-#' @examples MinusAddPlot(GeneExp,"Minus_Add_MA_plot.pdf")
+#' @examples MinusAddPlot(data,"Minus_Add_MA_plot.pdf")
 MinusAddPlot <- function(data=GeneExp,pdf="Minus_Add_MA_plot.pdf"){
 
     require(ggplot2)
