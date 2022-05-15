@@ -7,10 +7,8 @@
 #' @export 
 #'
 #' @examples library(data.table)
-#' @examples data<-fread(system.file("extdata", "gene_samples_exp.xls", package = "MinusAddPlot"),header=TRUE,stringsAsFactors=FALSE,data.table=FALSE)
-#' @examples pdf("Minus_Add_MA_plot.pdf")
-#' @examples MinusAddPlot(data)
-#' @examples dev.off()
+#' @examples data(GeneExp)
+#' @examples MinusAddPlot(GeneExp,"Minus_Add_MA_plot.pdf")
 MinusAddPlot <- function(data=GeneExp,pdf="Minus_Add_MA_plot.pdf"){
 
     require(ggplot2)
